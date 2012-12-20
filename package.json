@@ -1,0 +1,41 @@
+{
+  "name": "gdt",
+  "description": "a Git based Deployment Tool",
+  "version": "0.1.0",
+  "homepage": "https://github.com/danheberden/gdt",
+  "author": {
+    "name": "Dan Heberden",
+    "email": "danheberden@gmail.com",
+    "url": "http://danheberden.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danheberden/gdt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danheberden/gdt/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/danheberden/gdt/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/gdt",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.17"
+  },
+  "dependencies": {
+    "lodash": ">= 0.9.2",
+    "underscore.deferred": ">= 0.2.0",
+    "gith": ">= 1.0.3",
+    "deferred-exec": ">= 0.3.1"
+  },
+  "keywords": []
+}
