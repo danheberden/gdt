@@ -1,7 +1,3 @@
-var gdt = require('../lib/gdt.js');
-var dexec = require( 'deferred-exec' );
-var dfs = require( '../lib/deferred-fs.js' );
-
 /*
   ======== A Handy Little Nodeunit Reference ========
   https://github.com/caolan/nodeunit
@@ -22,15 +18,22 @@ var dfs = require( '../lib/deferred-fs.js' );
     test.ifError(value)
 */
 
-var site = {
-  git: 'test/gits/original-copy/',
-  deploy: 'test/site/deploy/',
-  live: 'test/site/live/'
-};
+// get and fire up gdt on port 8000
+var gdt = require('../lib/gdt.js').create( 8000 );
+var dexec = require( 'deferred-exec' );
+var dfs = require( '../lib/deferred-fs.js' );
 
-exports['git-magic'] = {
+var site = JSON.parse('{"git":"test/gits/original-copy/","deploy":"test/site/deploy/","live":"test/site/live/"}');
+
+// make a new site
+var testSite = gdt( site );
+
+// sanity:
+gdt.verbose( false );
+
+exports['gdt update stage and master'] = {
   setUp: function(done) {
-    // setup here
+    // clean up our testing area
     var commands = [ 
       'rm -rf test/gits/original-copy',
       'cp -r test/gits/original test/gits/original-copy',
@@ -47,6 +50,7 @@ exports['git-magic'] = {
       });
   },
   tearDown: function(done) {
+    // clean up behind ourselvesj
     dexec( 'rm -r test/gits/original-copy; rm -r test/site/live; rm -r test/site/deploy' )
       .then( function() {
         done();
@@ -58,7 +62,7 @@ exports['git-magic'] = {
   'update master': function(test) {
     test.expect( 2 );
     // tests here
-    var update1 = gdt( 'master', site, { deployLive: true }).then( function(){
+    var update1 = testSite.live( 'master' ).then( function(){
       return dfs.readFile( site.live + 'master.txt', 'utf8' );
     });
 
@@ -79,7 +83,7 @@ exports['git-magic'] = {
   'update staging' : function(test) {
     test.expect( 3 );
     var folder = site.deploy + 'stage/';
-    var update1 = gdt( 'stage', site, { deployLive: false }).then( function(){
+    var update1 = testSite.stage( 'stage' ).then( function(){
       return dfs.readFile( folder + 'master.txt', 'utf8' );
     });
 
