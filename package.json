@@ -34,7 +34,7 @@
   "dependencies": {
     "lodash": ">= 0.9.2",
     "underscore.deferred": ">= 0.2.0",
-    "gith": ">= 1.0.3",
+    "gith": ">= 1.0.4",
     "deferred-exec": ">= 0.3.1"
   },
   "keywords": []
