@@ -1,10 +1,10 @@
-# gdt
+# bear
 
 a <b>G</b>it based <b>D</b>eployment <b>T</b>ool
 
 ## what does it do?
 
-listens for changes to your git repository, gets the latest changes and launches them
+listens for changes to your git repository using [gith](http://github.com/danheberden/gith) and gets the latest changes and launches them
 
 ## is this it?
 
